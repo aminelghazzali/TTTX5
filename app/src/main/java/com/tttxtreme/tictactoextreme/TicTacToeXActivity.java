@@ -115,11 +115,12 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
         }
         field[i][j].setText(text);
     }
+
     boolean didWin(int p){
         for(int i = 0; i < 5; i++){
             int counter = 0;
             for(int j = 0; j < 5; j++) {
-                if (status[i][j] == p) {
+                if (status[i][j] == p ) {
                     counter++;
                 }
                 if (counter == 4) {
@@ -138,8 +139,47 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
                 }
             }
         }
+
+
+        for(int i = 4; i >= 0; i--){
+            int counter = 0;
+            int x = i;
+            for(int j = 4; j >= 0 ; j--) {
+
+                if (status[x][j] == p) {
+                    counter++;
+                    if (counter == 4) {
+                        return true;
+                    }
+                }
+                x++;
+                if(x == 5){
+                    break;
+                }
+            }
+
+        }
+        for(int j = 4; j >= 0; j--){
+            int counter = 0;
+            int x = j;
+            for(int i = 0; i < 5 ; i++) {
+
+                if (status[i][x] == p) {
+                    counter++;
+                    if (counter == 4) {
+                        return true;
+                    }
+                }
+                x--;
+                if(x < 0){
+                    break;
+                }
+            }
+
+        }
         return false;
     }
+
 }
 
 
