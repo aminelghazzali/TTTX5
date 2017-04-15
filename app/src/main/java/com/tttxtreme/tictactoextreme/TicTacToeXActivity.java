@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
     boolean gameOver = false;
     int player = PLAYER_1;
     TextView playerView;
+    Button button;
     int[][] status = new int[5][5];
     TextView[][] field = new TextView[5][5];
 
@@ -24,6 +26,13 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_tic_tac_toe_x);
+        button = (Button)findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restart();
+            }
+        });
 
         playerView  = (TextView)findViewById(R.id.player);
         playerView.setText("Player: " + player);
@@ -79,14 +88,15 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
             setStatus(i, j, player);
             if(didWin(player)){
                 gameOver = true;
+                playerView.setText("Player: " + player + " you win");
                 Toast.makeText(this, "PLAYER " + player + " wins", Toast.LENGTH_SHORT).show();
             }else {
                 changePlayer();
-                Toast.makeText(this, "PLAYER " + player + " get ready", Toast.LENGTH_SHORT).show();
             }
         }else{
             Toast.makeText(this, "Someone has already claimed this field", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     void changePlayer() {
@@ -127,6 +137,7 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
                     return true;
                 }
             }
+
         }
 
 
@@ -141,7 +152,7 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
                 }
             }
         }
-        
+
         //horizontal right side
         for(int i = 4; i >= 0; i--){
             int counter = 0;
@@ -216,12 +227,24 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
                     break;
                 }
             }
-
         }
-
         return false;
     }
 
+    void restart(){
+        gameOver = false;
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 5; j++){
+                status[i][j] = 0;
+                field[i][j].setText("");
+            }
+        }
+
+        player = PLAYER_1;
+        playerView.setText("Player: " + player);
+
+
+    }
 }
 
 
