@@ -128,6 +128,8 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
                 }
             }
         }
+
+
         for(int i = 0; i < 5; i++){
             int counter = 0;
             for(int j = 0; j < 5; j++) {
@@ -139,8 +141,8 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
                 }
             }
         }
-
-
+        
+        //horizontal right side
         for(int i = 4; i >= 0; i--){
             int counter = 0;
             int x = i;
@@ -157,13 +159,13 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
                     break;
                 }
             }
-
         }
+
+        //horizontal right side up
         for(int j = 4; j >= 0; j--){
             int counter = 0;
             int x = j;
             for(int i = 0; i < 5 ; i++) {
-
                 if (status[i][x] == p) {
                     counter++;
                     if (counter == 4) {
@@ -175,8 +177,48 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
                     break;
                 }
             }
+        }
+
+        //horizontal left side.
+        for(int i = 4; i >= 0; i--){
+            int counter = 0;
+            int x = i;
+            for(int j = 0; j <= 4 ; j++) {
+
+                if (status[x][j] == p) {
+                    counter++;
+                    if (counter == 4) {
+                        return true;
+                    }
+                }
+                x++;
+                if(x >= 5){
+                    break;
+                }
+            }
+        }
+
+
+        //horizontal left side up
+        for(int j = 0; j <= 4; j++){
+            int counter = 0;
+            int x = j;
+            for(int i = 0; i <= 5; i++) {
+
+                if (status[i][x] == p) {
+                    counter++;
+                    if (counter == 4) {
+                        return true;
+                    }
+                }
+                x++;
+                if(x >= 5){
+                    break;
+                }
+            }
 
         }
+
         return false;
     }
 
