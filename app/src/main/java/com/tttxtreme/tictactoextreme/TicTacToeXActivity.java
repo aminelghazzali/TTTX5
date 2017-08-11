@@ -2,6 +2,7 @@ package com.tttxtreme.tictactoextreme;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
     final int PLAYER_2 = 2;
 
 
+    TextView Countdowntimer;
     boolean gameOver = false;
     int player = PLAYER_1;
     TextView playerView;
@@ -36,6 +38,8 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
 
         playerView  = (TextView)findViewById(R.id.player);
         playerView.setText("Player: " + player);
+
+        Countdowntimer = (TextView) findViewById(R.id.Countdowntimer);
 
         field[0][0] = (TextView)findViewById(R.id.field00);
         field[0][1] = (TextView)findViewById(R.id.field01);
@@ -97,15 +101,33 @@ public class TicTacToeXActivity extends Activity implements View.OnClickListener
             Toast.makeText(this, "Someone has already claimed this field", Toast.LENGTH_SHORT).show();
         }
 
+        CountDownTimer countDownTimer = new CountDownTimer(5*1000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                Countdowntimer.setText("Countdown: " + millisUntilFinished/1000);
+                if(void restart() = true){
+                    CountDownTimer = 0;
+                }
+
+            }
+
+            @Override
+            public void onFinish() {
+                changePlayer();
+            }
+        }.start();
+
     }
 
     void changePlayer() {
         if (player == PLAYER_1) {
             player = PLAYER_2;
+
         } else {
             player = PLAYER_1;
         }
         playerView.setText("Player: " + player);
+
     }
     boolean isFree(int i, int j) {
         if (status[i][j] == 0) {
